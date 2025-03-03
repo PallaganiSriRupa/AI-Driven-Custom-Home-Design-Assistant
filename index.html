@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Home Design</title>
+    <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Home Design Assistant</h1>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="visual">Visual Design</button>
+            <button class="tab-btn" data-tab="advanced">Advanced Design Concept</button>
+            <button class="tab-btn" data-tab="scenarios">Industry Scenarios</button>
+        </div>
+        
+        <div id="visual-tab" class="tab-content active">
+            <form id="designForm">
+                <label for="bedrooms">Bedrooms:</label>
+                <input type="number" id="bedrooms" name="bedrooms" min="1" value="3" required>
+
+                <label for="bathrooms">Bathrooms:</label>
+                <input type="number" id="bathrooms" name="bathrooms" min="1" value="2" required>
+
+                <label for="houseSize">House Size (sq ft):</label>
+                <input type="number" id="houseSize" name="houseSize" value="2000" required>
+
+                <label for="style">Style:</label>
+                <select id="style" name="style">
+                    <option value="modern">Modern</option>
+                    <option value="traditional">Traditional</option>
+                    <option value="minimalist">Minimalist</option>
+                    <option value="colonial">Colonial</option>
+                    <option value="mediterranean">Mediterranean</option>
+                </select>
+
+                <button type="submit">Generate Design</button>
+            </form>
+
+            <div id="result" class="hidden">
+                <h2>Generated Design</h2>
+                <img id="designImage" src="" alt="Home Design">
+                <p id="designDetails"></p>
+            </div>
+        </div>
+        
+        <div id="advanced-tab" class="tab-content">
+            <form id="advancedDesignForm">
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="adv-bedrooms">Bedrooms:</label>
+                        <input type="number" id="adv-bedrooms" name="bedrooms" min="1" value="3" required>
+                        
+                        <label for="adv-bathrooms">Bathrooms:</label>
+                        <input type="number" id="adv-bathrooms" name="bathrooms" min="1" value="2" required>
+                        
+                        <label for="adv-houseSize">House Size (sq ft):</label>
+                        <input type="number" id="adv-houseSize" name="houseSize" value="2000" required>
+                    </div>
+                    
+                    <div class="form-column">
+                        <label for="adv-style">Architectural Style:</label>
+                        <select id="adv-style" name="style">
+                            <option value="modern">Modern</option>
+                            <option value="traditional">Traditional</option>
+                            <option value="minimalist">Minimalist</option>
+                            <option value="colonial">Colonial</option>
+                            <option value="mediterranean">Mediterranean</option>
+                            <option value="industrial">Industrial</option>
+                            <option value="craftsman">Craftsman</option>
+                            <option value="contemporary">Contemporary</option>
+                        </select>
+                        
+                        <label for="adv-amenities">Special Amenities:</label>
+                        <input type="text" id="adv-amenities" name="amenities" placeholder="e.g., Pool, Garden, Home Office">
+                        
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="adv-eco" name="eco">
+                            <label for="adv-eco">Eco-Friendly/Sustainable Design</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit">Generate Advanced Design Concept</button>
+            </form>
+            
+            <div id="advanced-result" class="hidden">
+                <h2>Generated Design Concept</h2>
+                <img id="advancedDesignImage" src="" alt="Home Design">
+                <div id="advancedDesignDetails"></div>
+                <div id="advancedDesignDescription"></div>
+            </div>
+        </div>
+        
+        <div id="scenarios-tab" class="tab-content">
+            <div class="scenario-selector">
+                <h2>Select an Industry Scenario</h2>
+                <div class="scenario-cards">
+                    <div class="scenario-card" data-scenario="real-estate">
+                        <h3>Real Estate Development</h3>
+                        <p>Create customized home designs for potential buyers based on their preferences.</p>
+                        <button class="select-scenario-btn">Select</button>
+                    </div>
+                    <div class="scenario-card" data-scenario="renovation">
+                        <h3>Home Renovation Services</h3>
+                        <p>Generate design proposals for clients looking to remodel their existing homes.</p>
+                        <button class="select-scenario-btn">Select</button>
+                    </div>
+                    <div class="scenario-card" data-scenario="architectural">
+                        <h3>Architectural Firm</h3>
+                        <p>Quickly generate preliminary design concepts for client collaboration.</p>
+                        <button class="select-scenario-btn">Select</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="real-estate-scenario" class="scenario-content hidden">
+                <h2>Real Estate Development Scenario</h2>
+                <p class="scenario-description">Offer potential buyers customized home designs based on their preferences. Help clients visualize their ideal homes and enhance their purchasing experience.</p>
+                
+                <form id="realEstateForm">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="re-bedrooms">Bedrooms:</label>
+                            <input type="number" id="re-bedrooms" name="bedrooms" min="1" value="4" required>
+                            
+                            <label for="re-bathrooms">Bathrooms:</label>
+                            <input type="number" id="re-bathrooms" name="bathrooms" min="1" value="3" required>
+                            
+                            <label for="re-houseSize">House Size (sq ft):</label>
+                            <input type="number" id="re-houseSize" name="houseSize" value="2500" required>
+                        </div>
+                        
+                        <div class="form-column">
+                            <label for="re-style">Architectural Style:</label>
+                            <select id="re-style" name="style">
+                                <option value="modern">Modern</option>
+                                <option value="traditional">Traditional</option>
+                                <option value="minimalist">Minimalist</option>
+                                <option value="colonial">Colonial</option>
+                                <option value="mediterranean">Mediterranean</option>
+                                <option value="craftsman">Craftsman</option>
+                            </select>
+                            
+                            <label for="re-lotSize">Lot Size (acres):</label>
+                            <input type="number" id="re-lotSize" name="lotSize" min="0.1" step="0.1" value="0.5">
+                            
+                            <label for="re-neighborhood">Neighborhood Type:</label>
+                            <select id="re-neighborhood" name="neighborhood">
+                                <option value="suburban">Suburban</option>
+                                <option value="urban">Urban</option>
+                                <option value="rural">Rural</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="re-amenities">Desired Amenities:</label>
+                            <input type="text" id="re-amenities" name="amenities" placeholder="e.g., Pool, Garden, Home Office">
+                        </div>
+                        
+                        <div class="form-column">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="re-eco" name="eco">
+                                <label for="re-eco">Eco-Friendly Features</label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="re-garage" name="garage" checked>
+                                <label for="re-garage">Include Garage</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit">Generate Real Estate Listing</button>
+                </form>
+                
+                <div id="real-estate-result" class="hidden">
+                    <h2>Property Listing Preview</h2>
+                    <div class="property-listing">
+                        <img id="reDesignImage" src="" alt="Property Design">
+                        <div class="property-details">
+                            <h3 id="rePropertyTitle">Beautiful Home in Prime Location</h3>
+                            <div class="property-specs">
+                                <span id="reBedBath">4 Bed | 3 Bath</span>
+                                <span id="reSize">2,500 sq ft</span>
+                                <span id="reLotSize">0.5 acres</span>
+                            </div>
+                            <div id="rePropertyDescription"></div>
+                            <div class="property-price">
+                                <span id="rePrice">$500,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="renovation-scenario" class="scenario-content hidden">
+                <h2>Home Renovation Services Scenario</h2>
+                <p class="scenario-description">Create design proposals for clients looking to remodel their existing homes. Help clients visualize potential changes and make informed decisions.</p>
+                
+                <form id="renovationForm">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="reno-currentBedrooms">Current Bedrooms:</label>
+                            <input type="number" id="reno-currentBedrooms" name="currentBedrooms" min="1" value="2" required>
+                            
+                            <label for="reno-targetBedrooms">Target Bedrooms:</label>
+                            <input type="number" id="reno-targetBedrooms" name="targetBedrooms" min="1" value="3" required>
+                            
+                            <label for="reno-currentBathrooms">Current Bathrooms:</label>
+                            <input type="number" id="reno-currentBathrooms" name="currentBathrooms" min="1" value="1" required>
+                            
+                            <label for="reno-targetBathrooms">Target Bathrooms:</label>
+                            <input type="number" id="reno-targetBathrooms" name="targetBathrooms" min="1" value="2" required>
+                        </div>
+                        
+                        <div class="form-column">
+                            <label for="reno-currentSize">Current Size (sq ft):</label>
+                            <input type="number" id="reno-currentSize" name="currentSize" value="1500" required>
+                            
+                            <label for="reno-targetSize">Target Size (sq ft):</label>
+                            <input type="number" id="reno-targetSize" name="targetSize" value="2000" required>
+                            
+                            <label for="reno-style">Desired Style:</label>
+                            <select id="reno-style" name="style">
+                                <option value="modern">Modern</option>
+                                <option value="traditional">Traditional</option>
+                                <option value="minimalist">Minimalist</option>
+                                <option value="industrial">Industrial</option>
+                                <option value="contemporary">Contemporary</option>
+                            </select>
+                            
+                            <label for="reno-budget">Renovation Budget ($):</label>
+                            <input type="number" id="reno-budget" name="budget" min="10000" step="5000" value="100000">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="reno-focusAreas">Renovation Focus Areas:</label>
+                            <select id="reno-focusAreas" name="focusAreas" multiple>
+                                <option value="kitchen">Kitchen</option>
+                                <option value="bathroom">Bathroom</option>
+                                <option value="livingRoom">Living Room</option>
+                                <option value="masterBedroom">Master Bedroom</option>
+                                <option value="addition">Home Addition</option>
+                                <option value="outdoor">Outdoor Space</option>
+                            </select>
+                            <small>Hold Ctrl/Cmd to select multiple</small>
+                        </div>
+                        
+                        <div class="form-column">
+                            <label for="reno-specialRequests">Special Requests:</label>
+                            <textarea id="reno-specialRequests" name="specialRequests" placeholder="Describe any specific requirements or ideas"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit">Generate Renovation Proposal</button>
+                </form>
+                
+                <div id="renovation-result" class="hidden">
+                    <h2>Renovation Proposal</h2>
+                    <div class="before-after-container">
+                        <div class="before-image">
+                            <h4>Current Home</h4>
+                            <div class="placeholder-image">Current Home Representation</div>
+                        </div>
+                        <div class="after-image">
+                            <h4>Proposed Renovation</h4>
+                            <img id="renoDesignImage" src="" alt="Renovation Design">
+                        </div>
+                    </div>
+                    <div class="renovation-details">
+                        <h3>Renovation Plan</h3>
+                        <div id="renoDescription"></div>
+                        <div class="renovation-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Estimated Cost:</span>
+                                <span id="renoCost">$100,000</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Estimated Timeline:</span>
+                                <span id="renoTimeline">3-4 months</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Size Increase:</span>
+                                <span id="renoSizeIncrease">500 sq ft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="architectural-scenario" class="scenario-content hidden">
+                <h2>Architectural Firm Scenario</h2>
+                <p class="scenario-description">Quickly generate preliminary design concepts for client collaboration. Accelerate the design process and provide a clear starting point for discussions.</p>
+                
+                <form id="architecturalForm">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="arch-projectType">Project Type:</label>
+                            <select id="arch-projectType" name="projectType">
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="mixed">Mixed-Use</option>
+                            </select>
+                            
+                            <label for="arch-bedrooms">Bedrooms (if residential):</label>
+                            <input type="number" id="arch-bedrooms" name="bedrooms" min="0" value="3">
+                            
+                            <label for="arch-bathrooms">Bathrooms:</label>
+                            <input type="number" id="arch-bathrooms" name="bathrooms" min="1" value="2">
+                            
+                            <label for="arch-floors">Number of Floors:</label>
+                            <input type="number" id="arch-floors" name="floors" min="1" value="2">
+                        </div>
+                        
+                        <div class="form-column">
+                            <label for="arch-size">Total Size (sq ft):</label>
+                            <input type="number" id="arch-size" name="size" value="3000">
+                            
+                            <label for="arch-style">Architectural Style:</label>
+                            <select id="arch-style" name="style">
+                                <option value="modern">Modern</option>
+                                <option value="contemporary">Contemporary</option>
+                                <option value="minimalist">Minimalist</option>
+                                <option value="industrial">Industrial</option>
+                                <option value="traditional">Traditional</option>
+                                <option value="brutalist">Brutalist</option>
+                                <option value="deconstructivist">Deconstructivist</option>
+                            </select>
+                            
+                            <label for="arch-siteContext">Site Context:</label>
+                            <select id="arch-siteContext" name="siteContext">
+                                <option value="urban">Urban</option>
+                                <option value="suburban">Suburban</option>
+                                <option value="rural">Rural</option>
+                                <option value="waterfront">Waterfront</option>
+                                <option value="mountainous">Mountainous</option>
+                            </select>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="arch-sustainable" name="sustainable" checked>
+                                <label for="arch-sustainable">Sustainable Design Principles</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="arch-materials">Preferred Materials:</label>
+                            <select id="arch-materials" name="materials" multiple>
+                                <option value="concrete">Concrete</option>
+                                <option value="glass">Glass</option>
+                                <option value="steel">Steel</option>
+                                <option value="wood">Wood</option>
+                                <option value="brick">Brick</option>
+                                <option value="stone">Stone</option>
+                            </select>
+                            <small>Hold Ctrl/Cmd to select multiple</small>
+                        </div>
+                        
+                        <div class="form-column">
+                            <label for="arch-designBrief">Design Brief:</label>
+                            <textarea id="arch-designBrief" name="designBrief" placeholder="Describe the project goals, client needs, and any specific requirements"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit">Generate Architectural Concept</button>
+                </form>
+                
+                <div id="architectural-result" class="hidden">
+                    <h2>Architectural Concept</h2>
+                    <div class="concept-container">
+                        <div class="concept-visuals">
+                            <img id="archDesignImage" src="" alt="Architectural Concept">
+                            <div class="concept-sketches">
+                                <div class="sketch-placeholder">Floor Plan Representation</div>
+                                <div class="sketch-placeholder">Elevation Representation</div>
+                            </div>
+                        </div>
+                        <div class="concept-details">
+                            <h3>Design Concept</h3>
+                            <div id="archConceptDescription"></div>
+                            <div class="concept-specs">
+                                <div class="spec-group">
+                                    <h4>Building Specifications</h4>
+                                    <div id="archBuildingSpecs"></div>
+                                </div>
+                                <div class="spec-group">
+                                    <h4>Materials & Sustainability</h4>
+                                    <div id="archMaterialsSpecs"></div>
+                                </div>
+                                <div class="spec-group">
+                                    <h4>Estimated Project Details</h4>
+                                    <div id="archProjectDetails"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./src/script.js"></script>
+</body>
+</html>
